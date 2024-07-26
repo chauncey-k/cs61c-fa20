@@ -1,7 +1,19 @@
-1.
-2.
-3.
-4.
-5.
-6.
-7.
+1.-rm -rf core *.o *~ "#"*"#" Makefile.bak $(BINARIES) *.dSYM
+该规则使用 rm 命令删除各种文件类型，包括目标文件 (*.o)、备份文件 (*~ 和 #*#)、编译生成的二进制文件 ($(BINARIES))，以及 macOS 生成的调试文件 (*.dSYM)。这个 clean 目标常用于清理构建目录，使其回到一个干净的状态。
+2.all: $(BINARIES)
+这里的 $(BINARIES) 是一个变量，它包含了所有需要编译生成的二进制文件的列表。在这个 Makefile 中，$(BINARIES) 包含了三个目标：$(VECTOR_PROG), $(BIT_OPS_PROG), 和 $(LFSR_PROG)，分别对应三个程序的可执行文件。这些变量在 Makefile 的前面定义如下：
+
+BIT_OPS_PROG = bit_ops
+
+LFSR_PROG = lfsr
+
+VECTOR_PROG=vector-test
+
+BINARIES=$(VECTOR_PROG) $(BIT_OPS_PROG) $(LFSR_PROG)
+3.gcc
+4.c99
+5.$(FOO) or ${FOO}
+6.术语“Darwin”代表的是 macOS 操作系统的核心，它是 macOS 的开源基础。Darwin 是由苹果公司开发的操作系统内核和相关系统库的集合，是 macOS 和 iOS 操作系统的核心组件。Darwin 包含了一个基于微内核的操作系统核心（XNU）和其他许多操作系统服务和功能。
+7.31:
+$(LFSR_PROG): $(LFSR_OBJS)
+	$(CC) $(CFLAGS) -g -o $(LFSR_PROG) $(LFSR_OBJS) $(LDFLAGS)
